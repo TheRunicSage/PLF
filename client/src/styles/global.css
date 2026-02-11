@@ -626,8 +626,8 @@ button:disabled,
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   background:
-    radial-gradient(700px 300px at 95% 0%, rgba(255, 255, 255, 0.3), transparent 60%),
-    #e8ddc5;
+    radial-gradient(700px 300px at 95% 0%, rgba(255, 255, 255, 0.24), transparent 60%),
+    #e7dbc2;
 }
 
 .about-founder__media {
@@ -637,12 +637,14 @@ button:disabled,
 
 .about-founder__media img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 4.2;
   object-fit: cover;
+  object-position: center;
 }
 
 .about-founder__body {
   font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  line-height: 1.65;
 }
 
 .about-founder__name {
@@ -657,15 +659,19 @@ button:disabled,
   color: color-mix(in srgb, var(--text) 70%, var(--highlight));
 }
 
+.about-founder__body p:last-child {
+  max-width: 60ch;
+}
+
 .about-mission-visual {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  min-height: clamp(440px, 52vw, 620px);
+  min-height: clamp(440px, 52vw, 640px);
   padding: clamp(1rem, 3vw, 2.4rem);
   color: #f9f7f2;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   display: grid;
   gap: var(--space-4);
 }
@@ -690,8 +696,9 @@ button:disabled,
 }
 
 .about-mission-visual__content p {
-  max-width: 30ch;
+  max-width: 34ch;
   font-size: clamp(1.05rem, 1rem + 0.25vw, 1.22rem);
+  line-height: 1.55;
 }
 
 .about-mission-visual__portrait {
@@ -712,8 +719,9 @@ button:disabled,
 
 .about-library-strip {
   overflow: hidden;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
 }
 
 .about-library-strip img {

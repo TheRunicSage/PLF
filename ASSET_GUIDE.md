@@ -14,20 +14,20 @@ This project now uses **local assets only** for branding and key visuals.
   - Recommended: square PNG, `256x256` or higher.
 
 ### About page
-- `client/public/assets/about/khushwant-singh.svg`
-- `client/public/assets/about/sanna-kaushal.svg`
+- `client/public/assets/about/khushwant-singh.jpeg`
+- `client/public/assets/about/sanna-kaushal.jpeg`
   - Founder images.
   - Recommended replacement: JPG/PNG, at least `1200x1200` (square).
 
-- `client/public/assets/about/mission-background.svg`
+- `client/public/assets/about/about-header-bg.png`
   - Mission section background.
   - Recommended replacement: JPG/PNG, `1920x1080` (or wider).
 
-- `client/public/assets/about/mission-portrait.svg`
+- `client/public/assets/about/mission-portrait.png`
   - Circular mission portrait image.
   - Recommended replacement: JPG/PNG, `900x900` (square).
 
-- `client/public/assets/about/library-on-wheels.svg`
+- `client/public/assets/about/library-on-wheels.png`
   - Bottom strip image on About page.
   - Recommended replacement: JPG/PNG, around `1920x900`.
 
