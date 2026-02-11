@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Khushwant Singh portrait placeholder</title>
+  <desc id="desc">Local placeholder portrait for Khushwant Singh.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a3d5f" />
+      <stop offset="100%" stop-color="#b07f2f" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)" />
+  <circle cx="600" cy="420" r="220" fill="#f2d5ad" />
+  <path d="M380 940c36-182 174-286 220-286s184 104 220 286" fill="#7f4d2c" />
+  <rect x="280" y="990" width="640" height="110" rx="16" fill="#ffffff" fill-opacity="0.2" />
+  <text x="600" y="1062" font-family="Georgia, serif" font-size="56" text-anchor="middle" fill="#ffffff">Khushwant Singh</text>
+</svg>

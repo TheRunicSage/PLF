@@ -16,12 +16,9 @@ const daysFromNow = (days) => {
 };
 
 const brandAssets = {
-  logo:
-    'https://punjablitfoundation.com/wp-content/uploads/2024/03/cropped-PLF-Logo-Photoroom.png',
-  campaignPoster:
-    'https://punjablitfoundation.com/wp-content/uploads/2024/03/20240326_193919_0000.png',
-  eventPoster:
-    'https://punjablitfoundation.com/wp-content/uploads/2024/03/WhatsApp-Image-2024-03-27-at-8.12.07-PM-768x959.jpeg',
+  logo: '/assets/brand/plf-logo.png',
+  campaignPoster: '/assets/content/campaign-poster.svg',
+  eventPoster: '/assets/content/event-poster.svg',
 };
 
 const sampleProjects = [

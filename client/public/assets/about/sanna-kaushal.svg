@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Sanna Kaushal portrait placeholder</title>
+  <desc id="desc">Local placeholder portrait for Sanna Kaushal.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9e6f25" />
+      <stop offset="100%" stop-color="#1d3b67" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)" />
+  <circle cx="600" cy="420" r="220" fill="#f0d2b2" />
+  <path d="M340 940c48-190 196-294 260-294s212 104 260 294" fill="#1e2d49" />
+  <rect x="250" y="990" width="700" height="110" rx="16" fill="#ffffff" fill-opacity="0.2" />
+  <text x="600" y="1062" font-family="Georgia, serif" font-size="56" text-anchor="middle" fill="#ffffff">Sanna Kaushal</text>
+</svg>

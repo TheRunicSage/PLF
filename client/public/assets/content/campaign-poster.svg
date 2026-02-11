@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Campaign poster placeholder</title>
+  <desc id="desc">Local campaign poster placeholder graphic.</desc>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#203a65" />
+      <stop offset="100%" stop-color="#a56e24" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#g)" />
+  <rect x="140" y="140" width="1320" height="720" rx="28" fill="#ffffff" fill-opacity="0.16" />
+  <text x="800" y="450" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="82">Punjab Lit Foundation</text>
+  <text x="800" y="540" text-anchor="middle" fill="#f5e2bf" font-family="Arial, sans-serif" font-size="48">Community Campaign</text>
+</svg>

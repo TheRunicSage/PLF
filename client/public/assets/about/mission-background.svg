@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Mission background placeholder</title>
+  <desc id="desc">Local mission background illustration for Punjab Lit Foundation.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b4f73" />
+      <stop offset="100%" stop-color="#1b2436" />
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)" />
+  <circle cx="420" cy="300" r="70" fill="#d6b071" fill-opacity="0.8" />
+  <path d="M0 770c210-120 400-40 550-90s310-170 520-120 310 160 430 130 260-110 420-20v410H0z" fill="#121a28" fill-opacity="0.9" />
+  <rect x="120" y="880" width="850" height="110" rx="18" fill="#ffffff" fill-opacity="0.12" />
+  <text x="545" y="952" font-family="Georgia, serif" font-size="56" text-anchor="middle" fill="#f8f1e3">Our mission</text>
+</svg>

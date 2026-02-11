@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Event poster placeholder</title>
+  <desc id="desc">Local event poster placeholder graphic.</desc>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#162846" />
+      <stop offset="100%" stop-color="#6d4a1d" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#g)" />
+  <circle cx="1220" cy="220" r="88" fill="#d5ad64" fill-opacity="0.75" />
+  <rect x="120" y="120" width="1360" height="760" rx="28" fill="#ffffff" fill-opacity="0.12" />
+  <text x="800" y="450" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="82">PLF Event</text>
+  <text x="800" y="540" text-anchor="middle" fill="#f5e2bf" font-family="Arial, sans-serif" font-size="46">News & Updates</text>
+</svg>

@@ -2,8 +2,7 @@
   global: {
     siteName: 'Punjab Lit Foundation',
     brand: {
-      logoUrl:
-        'https://punjablitfoundation.com/wp-content/uploads/2024/03/cropped-PLF-Logo-Photoroom.png',
+      logoUrl: '/assets/brand/plf-logo.png',
       logoAlt: 'Punjab Lit Foundation logo',
     },
     tagline: 'Enlighten. Connect. Support.',
@@ -221,10 +220,8 @@
       title: 'Our mission',
       text:
         "At the Punjab Lit Foundation, our mission is multifaceted: we strive to promote and cultivate creativity, empowering the region to build its creative wealth. Additionally, we are committed to uplifting Punjab's cultural and social status through knowledge-based narratives. By doing so, we aim to elevate the intellectual capacity of the region to new heights, fostering a vibrant and enriched cultural landscape. Join us in our journey to celebrate the richness of Punjab's literary and cultural heritage.",
-      backgroundImageUrl:
-        'https://punjablitfoundation.com/wp-content/uploads/2024/03/DSC02611-1-scaled.jpg',
-      portraitImageUrl:
-        'https://punjablitfoundation.com/wp-content/uploads/2024/03/%E0%A8%B5%E0%A9%B1%E0%A8%A7%E0%A8%A6%E0%A8%BE-%E0%A8%AA%E0%A9%B0%E0%A8%9C%E0%A8%BE%E0%A8%AC-%E0%A8%AA%E0%A9%9C%E0%A9%8D%E0%A8%B9%E0%A8%A6%E0%A8%BE-%E0%A8%AA%E0%A9%B0%E0%A8%9C%E0%A8%BE%E0%A8%AC-2.jpeg',
+      backgroundImageUrl: '/assets/about/mission-background.svg',
+      portraitImageUrl: '/assets/about/mission-portrait.svg',
     },
     leadershipHeading: 'Co-founders',
     leaders: [
@@ -233,18 +230,17 @@
         role: 'Co-founder | Author, Philanthropist, Creative Activist',
         bio:
           "He is distinguished as an author, philanthropist, and creative activist. A literary luminary of contemporary India, he boasts a repertoire of six published works, alongside notable roles as a columnist, editor, and as the State Information Commissioner of Punjab. Singh's patronage of the Hoshiarpur Lit Fest, the preeminent literary gathering of Punjab, underscores his commitment to fostering intellectual discourse within his home state. Renowned for his innovative approach to narrative construction, Singh continues to push the boundaries of creativity in service of Punjab's cultural narrative. Notably, his 100-kilometer walk against drug abuse in December 2023 stands as a testament to his dedication to societal betterment.",
-        imageUrl: 'https://punjablitfoundation.com/wp-content/uploads/2024/03/Khushwant-Singh.jpeg',
+        imageUrl: '/assets/about/khushwant-singh.svg',
       },
       {
         name: 'Sanna Kaushal',
         role: 'Co-founder | Author',
         bio:
           'Her leadership has been instrumental in advancing literary endeavors in Punjab. Notably, she led the transformation of the Hoshiarpur Lit Society into the Punjab Lit Foundation, renowned for organizing prestigious literary events. Additionally, she championed the "Parhada Punjab, Vadhda Punjab" initiative, conducting regular creative writing workshops and establishing two mobile libraries to enhance access to books for citizens. As a published author, Sanna Kaushal has gained recognition for her debut book "Hands That Disobeyed" and has contributed her voice to various topics through her articles in the Hindustan Times column "Spice of Life." Passionate about empowering women, Sanna is dedicated to unveiling the untapped potential within the women of her country, striving to amplify their voices and opportunities.',
-        imageUrl: 'https://punjablitfoundation.com/wp-content/uploads/2024/03/Sanna-Kaushal.jpg',
+        imageUrl: '/assets/about/sanna-kaushal.svg',
       },
     ],
-    libraryImageUrl:
-      'https://punjablitfoundation.com/wp-content/uploads/2024/03/IMG-20240326-WA0032.jpg',
+    libraryImageUrl: '/assets/about/library-on-wheels.svg',
     libraryImageAlt: 'Punjab Lit Foundation library on wheels',
   },
 

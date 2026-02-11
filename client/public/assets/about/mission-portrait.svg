@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Mission portrait placeholder</title>
+  <desc id="desc">Local circular mission portrait placeholder.</desc>
+  <defs>
+    <linearGradient id="field" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d8b777" />
+      <stop offset="100%" stop-color="#8b5b2b" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" fill="url(#field)" />
+  <circle cx="450" cy="450" r="260" fill="#f4dec0" />
+  <path d="M300 660c20-92 100-156 150-156s130 64 150 156" fill="#a65432" />
+  <rect x="180" y="740" width="540" height="90" rx="12" fill="#ffffff" fill-opacity="0.25" />
+  <text x="450" y="800" font-family="Georgia, serif" font-size="44" text-anchor="middle" fill="#13203a">Punjab Literature</text>
+</svg>
