@@ -6,9 +6,6 @@
   "functions": {
     "api/[...route].mjs": {
       "maxDuration": 10
-    },
-    "api/[route]/[...rest].mjs": {
-      "maxDuration": 10
     }
   },
   "rewrites": [
