@@ -172,10 +172,26 @@
     videos: {
       heading: 'Video highlights',
       cards: [
-        { title: "People's Walk Against Drugs yatra", mediaClass: 'media-placeholder--blue' },
-        { title: 'Mothers Against Drugs awareness initiative', mediaClass: 'media-placeholder--olive' },
-        { title: "Living By The Pen: The Writer's Way", mediaClass: 'media-placeholder--sun' },
-        { title: 'Chandigarh Lit Fest conversations', mediaClass: 'media-placeholder--mint' },
+        {
+          title: "People's Walk Against Drugs yatra",
+          mediaClass: 'media-placeholder--blue',
+          videoUrl: '',
+        },
+        {
+          title: 'Mothers Against Drugs awareness initiative',
+          mediaClass: 'media-placeholder--olive',
+          videoUrl: '',
+        },
+        {
+          title: "Living By The Pen: The Writer's Way",
+          mediaClass: 'media-placeholder--sun',
+          videoUrl: '',
+        },
+        {
+          title: 'Chandigarh Lit Fest conversations',
+          mediaClass: 'media-placeholder--mint',
+          videoUrl: '',
+        },
       ],
       playLabel: 'Play video',
     },

@@ -18,6 +18,7 @@ const initialForm = {
   slug: '',
   type: 'news',
   excerpt: '',
+  videoUrl: '',
   content: '',
   published: false,
 };
@@ -101,6 +102,7 @@ const AdminPosts = () => {
         slug: resolvedSlug,
         type: form.type,
         excerpt: form.excerpt,
+        videoUrl: form.videoUrl,
         content: form.content,
         published: form.published,
       };
@@ -146,6 +148,7 @@ const AdminPosts = () => {
       slug: post.slug || '',
       type: post.type || 'news',
       excerpt: post.excerpt || '',
+      videoUrl: post.videoUrl || '',
       content: post.content || '',
       published: Boolean(post.published),
     });
@@ -250,6 +253,18 @@ const AdminPosts = () => {
                     placeholder="Short excerpt"
                   />
                   {fieldErrors.excerpt && <p className="field-error">{fieldErrors.excerpt}</p>}
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="post-video-url">Video URL (optional)</label>
+                  <input
+                    id="post-video-url"
+                    name="videoUrl"
+                    value={form.videoUrl}
+                    onChange={handleFormChange}
+                    placeholder="https://www.youtube.com/watch?v=..."
+                  />
+                  {fieldErrors.videoUrl && <p className="field-error">{fieldErrors.videoUrl}</p>}
                 </div>
 
                 <div className="form-field">

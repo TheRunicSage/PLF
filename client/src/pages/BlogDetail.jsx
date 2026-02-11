@@ -5,6 +5,7 @@ import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { getVideoEmbedData } from '../utils/videoEmbed.js';
 
 const formatDate = (value) => {
   if (!value) {
@@ -104,6 +105,7 @@ const BlogDetail = () => {
     () => (post?.publishedAt ? formatDate(post.publishedAt) : formatDate(post?.createdAt)),
     [post]
   );
+  const videoEmbedData = useMemo(() => getVideoEmbedData(post?.videoUrl), [post?.videoUrl]);
 
   return (
     <div className="page page-premium">
@@ -133,6 +135,24 @@ const BlogDetail = () => {
                   <p className="kicker">{post.type}</p>
                   <h1 className="headline-md">{post.title}</h1>
                   <p className="meta">{publishedLabel}</p>
+                  {videoEmbedData && (
+                    <div className="detail-video-wrap">
+                      {videoEmbedData.type === 'iframe' ? (
+                        <iframe
+                          src={videoEmbedData.src}
+                          title={videoEmbedData.title}
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video controls preload="metadata" src={videoEmbedData.src}>
+                          <track kind="captions" />
+                        </video>
+                      )}
+                    </div>
+                  )}
                   <p style={{ whiteSpace: 'pre-wrap' }}>{post.content}</p>
 
                   {post.type === 'event' && (post.eventStartDate || post.location) && (

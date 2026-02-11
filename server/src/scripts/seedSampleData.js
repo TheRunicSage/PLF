@@ -129,6 +129,7 @@ const samplePosts = [
     publishedAt: daysFromNow(-10),
     isFeatured: true,
     featuredImageUrl: brandAssets.eventPoster,
+    videoUrl: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
     categories: ['literary', 'blog'],
     tags: ['writing', 'session'],
   },

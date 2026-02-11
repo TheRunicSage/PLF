@@ -6,6 +6,7 @@ import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { getVideoEmbedData } from '../utils/videoEmbed.js';
 
 const formatDate = (value, withTime = false) => {
   if (!value) {
@@ -424,15 +425,38 @@ const Home = () => {
           </Reveal>
 
           <Stagger className="video-strip">
-            {copy.videos.cards.map((item) => (
-              <article key={item.title} className="video-card">
-                <div className="video-card__media">
-                  <div className={`media-placeholder ${item.mediaClass}`} aria-hidden="true" />
-                  <div className="video-card__overlay" aria-hidden="true" />
-                </div>
-                <h3>{item.title}</h3>
-              </article>
-            ))}
+            {copy.videos.cards.map((item) => {
+              const videoEmbed = getVideoEmbedData(item.videoUrl);
+
+              return (
+                <article key={item.title} className="video-card">
+                  <div className="video-card__media">
+                    {videoEmbed ? (
+                      videoEmbed.type === 'iframe' ? (
+                        <iframe
+                          src={videoEmbed.src}
+                          title={item.title}
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video controls preload="metadata" src={videoEmbed.src}>
+                          <track kind="captions" />
+                        </video>
+                      )
+                    ) : (
+                      <>
+                        <div className={`media-placeholder ${item.mediaClass}`} aria-hidden="true" />
+                        <div className="video-card__overlay" aria-hidden="true" />
+                      </>
+                    )}
+                  </div>
+                  <h3>{item.title}</h3>
+                </article>
+              );
+            })}
           </Stagger>
         </div>
       </section>
