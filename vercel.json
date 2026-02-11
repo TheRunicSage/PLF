@@ -4,7 +4,13 @@
   "buildCommand": "npm run build:client",
   "outputDirectory": "client/dist",
   "functions": {
-    "api/[...route].mjs": {
+    "api/[route].mjs": {
+      "maxDuration": 10
+    },
+    "api/[route]/[subroute].mjs": {
+      "maxDuration": 10
+    },
+    "api/[route]/[subroute]/[id].mjs": {
       "maxDuration": 10
     }
   },
