@@ -838,6 +838,11 @@ button:disabled,
   border: 1px solid var(--border);
 }
 
+.donate-upi-label {
+  margin-top: var(--space-2);
+  word-break: break-word;
+}
+
 .split-head {
   display: grid;
   gap: var(--space-3);

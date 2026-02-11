@@ -8,6 +8,9 @@ import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
 import { getVideoEmbedData } from '../utils/videoEmbed.js';
 
+const DEFAULT_QR_URLS = ['/assets/donate/gpay-upi-qr.png'];
+const DEFAULT_UPI_LABEL = 'UPI ID: khushwant.ahluwalia-1@oksbi';
+
 const formatDate = (value, withTime = false) => {
   if (!value) {
     return 'Date TBA';
@@ -216,6 +219,9 @@ const Home = () => {
   }, [copy.errors.events, copy.errors.posts, copy.errors.projects, copy.errors.settings]);
 
   const featuredProject = useMemo(() => projectsState.items[0] || null, [projectsState.items]);
+  const qrUrls = settingsState.donationQrImageUrls.length === 0
+    ? DEFAULT_QR_URLS
+    : settingsState.donationQrImageUrls;
 
   return (
     <div className="home-page">
@@ -313,16 +319,17 @@ const Home = () => {
 
                   <article className="card card--soft">
                     <h4>{copy.donateBanner.qrTitle}</h4>
-                    {settingsState.donationQrImageUrls.length === 0 && (
+                    {qrUrls.length === 0 && (
                       <p className="muted-text">{copy.donateBanner.qrFallback}</p>
                     )}
-                    {settingsState.donationQrImageUrls.length > 0 && (
+                    {qrUrls.length > 0 && (
                       <div className="qr-grid">
-                        {settingsState.donationQrImageUrls.map((url) => (
+                        {qrUrls.map((url) => (
                           <img key={url} src={url} alt="Donation QR code" loading="lazy" />
                         ))}
                       </div>
                     )}
+                    <p className="meta donate-upi-label">{DEFAULT_UPI_LABEL}</p>
                   </article>
                 </div>
               </>

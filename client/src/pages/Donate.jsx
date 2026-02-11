@@ -5,6 +5,9 @@ import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
 
+const DEFAULT_QR_URLS = ['/assets/donate/gpay-upi-qr.png'];
+const DEFAULT_UPI_LABEL = 'UPI ID: khushwant.ahluwalia-1@oksbi';
+
 const Donate = () => {
   const copy = siteCopy.donate;
   const [settings, setSettings] = useState({
@@ -14,6 +17,7 @@ const Donate = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const qrUrls = settings.donationQrImageUrls.length === 0 ? DEFAULT_QR_URLS : settings.donationQrImageUrls;
 
   useEffect(() => {
     let mounted = true;
@@ -87,15 +91,16 @@ const Donate = () => {
 
               <article className="card">
                 <h2>{copy.qrHeading}</h2>
-                {settings.donationQrImageUrls.length === 0 ? (
+                {qrUrls.length === 0 ? (
                   <p className="muted-text">{copy.qrFallback}</p>
                 ) : (
                   <div className="qr-grid">
-                    {settings.donationQrImageUrls.map((url) => (
+                    {qrUrls.map((url) => (
                       <img key={url} src={url} alt="Donation QR code" loading="lazy" />
                     ))}
                   </div>
                 )}
+                <p className="meta donate-upi-label">{DEFAULT_UPI_LABEL}</p>
               </article>
             </Stagger>
           )}

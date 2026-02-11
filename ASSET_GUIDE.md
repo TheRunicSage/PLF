@@ -37,6 +37,11 @@ This project now uses **local assets only** for branding and key visuals.
   - Used by seeded sample data image URLs.
   - Recommended replacement: JPG/PNG, around `1600x1000`.
 
+### Donate
+- `client/public/assets/donate/gpay-upi-qr.png`
+  - Default QR displayed on Donate/Home if no QR URLs are saved in admin settings.
+  - Recommended replacement: square PNG, `900x900` or higher.
+
 ## How to replace an asset
 1. Keep the same filename and path, overwrite the file.
 2. Rebuild frontend:
