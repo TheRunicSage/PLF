@@ -78,26 +78,26 @@ const Donate = () => {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-wide">
+      <section className="section donate-details-section">
+        <div className="container-wide donate-details-shell">
           {loading && <p className="muted-text">{copy.loading}</p>}
           {!loading && error && <p className="status error">{error}</p>}
 
           {!loading && !error && (
-            <Stagger className="content-grid content-grid--two">
-              <article className="card">
+            <Stagger className="content-grid content-grid--two donate-details-grid">
+              <article className="card card--soft donate-details-grid__item">
                 <h2>{copy.bankDetailsHeading}</h2>
                 <p style={{ whiteSpace: 'pre-wrap' }}>
                   {settings.donationBankDetails || copy.bankDetailsFallback}
                 </p>
               </article>
 
-              <article className="card">
+              <article className="card card--soft donate-details-grid__item donate-details-grid__item--qr">
                 <h2>{copy.qrHeading}</h2>
                 {qrUrls.length === 0 ? (
                   <p className="muted-text">{copy.qrFallback}</p>
                 ) : (
-                  <div className="qr-grid">
+                  <div className="qr-grid qr-grid--donate">
                     {qrUrls.map((url) => (
                       <img key={url} src={url} alt="Donation QR code" loading="lazy" />
                     ))}

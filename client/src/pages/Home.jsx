@@ -313,20 +313,20 @@ const Home = () => {
                 </div>
 
                 <div className="donate-card__grid">
-                  <article className="card card--soft">
+                  <article className="card card--soft donate-card__pane">
                     <h4>{copy.donateBanner.bankTitle}</h4>
                     <p style={{ whiteSpace: 'pre-wrap' }}>
                       {settingsState.donationBankDetails || copy.donateBanner.bankFallback}
                     </p>
                   </article>
 
-                  <article className="card card--soft">
+                  <article className="card card--soft donate-card__pane donate-card__pane--qr">
                     <h4>{copy.donateBanner.qrTitle}</h4>
                     {qrUrls.length === 0 && (
                       <p className="muted-text">{copy.donateBanner.qrFallback}</p>
                     )}
                     {qrUrls.length > 0 && (
-                      <div className="qr-grid">
+                      <div className="qr-grid qr-grid--home">
                         {qrUrls.map((url) => (
                           <img key={url} src={url} alt="Donation QR code" loading="lazy" />
                         ))}

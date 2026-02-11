@@ -822,29 +822,47 @@ button:disabled,
 .donate-card__grid {
   display: grid;
   gap: var(--space-3);
+  align-items: start;
+}
+
+.donate-card__pane {
+  align-self: start;
+}
+
+.donate-card__pane h4 {
+  margin-bottom: 0.6rem;
 }
 
 .qr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
-  gap: 0.8rem;
-  justify-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 250px));
+  gap: 0.9rem;
+  justify-content: flex-start;
+  align-items: start;
 }
 
 .qr-grid img {
   width: 100%;
-  max-width: 240px;
+  max-width: 250px;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: #fff;
-  padding: 0.35rem;
+  padding: 0.42rem;
 }
 
 .donate-upi-label {
   margin-top: var(--space-2);
   word-break: break-word;
+}
+
+.qr-grid--home img {
+  max-width: 230px;
+}
+
+.qr-grid--donate img {
+  max-width: 260px;
 }
 
 .split-head {
@@ -1182,6 +1200,31 @@ button:disabled,
 
 .donate-hero {
   background: linear-gradient(145deg, rgba(12, 84, 67, 0.16), rgba(58, 119, 95, 0.08));
+}
+
+.donate-details-section {
+  padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+.donate-details-shell {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, white);
+  background:
+    radial-gradient(440px 180px at 100% 0%, rgba(213, 174, 94, 0.08), transparent 62%),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(244, 248, 246, 0.94));
+  padding: clamp(0.9rem, 2.6vw, 1.6rem);
+}
+
+.donate-details-grid {
+  align-items: start;
+}
+
+.donate-details-grid__item {
+  align-self: start;
+}
+
+.donate-details-grid__item h2 {
+  margin-bottom: var(--space-2);
 }
 
 .form-card {
