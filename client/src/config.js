@@ -78,6 +78,27 @@ export const apiRequest = async (path, options = {}) => {
     },
   }));
 
+  const isValidApiEnvelope =
+    payload
+    && typeof payload === 'object'
+    && Object.prototype.hasOwnProperty.call(payload, 'data')
+    && Object.prototype.hasOwnProperty.call(payload, 'error');
+
+  if (!isValidApiEnvelope) {
+    const malformedError = new Error('Invalid server response.');
+    malformedError.status = response.status;
+    throw malformedError;
+  }
+
+  if (response.ok && payload.error) {
+    const unexpectedError = new Error(payload.error.message || 'Invalid server response.');
+    if (payload.error.details && typeof payload.error.details === 'object') {
+      unexpectedError.details = payload.error.details;
+    }
+    unexpectedError.status = response.status;
+    throw unexpectedError;
+  }
+
   if (!response.ok) {
     const message = payload?.error?.message || payload?.message || 'Request failed.';
     const requestError = new Error(message);
