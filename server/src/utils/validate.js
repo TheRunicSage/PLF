@@ -1,6 +1,7 @@
 const POST_TYPES = new Set(['news', 'story', 'blog', 'press', 'event']);
 const PROJECT_STATUSES = new Set(['ongoing', 'completed', 'upcoming']);
 const IMAGE_DATA_URL_PATTERN = /^data:image\/[a-z0-9.+-]+;base64,[a-z0-9+/=\s]+$/i;
+const LOCAL_ASSET_PATH_PATTERN = /^\/[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?$/;
 
 const isEmpty = (value) => typeof value !== 'string' || value.trim().length === 0;
 const hasValue = (value) => value !== undefined && value !== null;
@@ -19,7 +20,9 @@ const isValidMediaValue = (value) => {
   }
 
   const trimmed = value.trim();
-  return isValidUrl(trimmed) || IMAGE_DATA_URL_PATTERN.test(trimmed);
+  return isValidUrl(trimmed)
+    || IMAGE_DATA_URL_PATTERN.test(trimmed)
+    || LOCAL_ASSET_PATH_PATTERN.test(trimmed);
 };
 
 const validateImageArray = (value, fieldName, details) => {

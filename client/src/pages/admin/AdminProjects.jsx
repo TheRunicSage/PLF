@@ -203,6 +203,8 @@ const AdminProjects = () => {
   };
 
   const handleEdit = (project) => {
+    const resolvedStatus = statuses.includes(project.status) ? project.status : 'ongoing';
+
     setEditingId(project._id);
     setFieldErrors({});
     setStatus({ type: '', text: '' });
@@ -211,7 +213,7 @@ const AdminProjects = () => {
       slug: project.slug || '',
       shortDescription: project.shortDescription || '',
       longDescription: project.longDescription || '',
-      status: project.status || 'ongoing',
+      status: resolvedStatus,
       thumbnailUrl: project.thumbnailUrl || '',
       imageUrlsText: Array.isArray(project.imageUrls) ? project.imageUrls.join('\n') : '',
       isHighlighted: Boolean(project.isHighlighted),

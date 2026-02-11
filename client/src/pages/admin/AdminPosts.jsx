@@ -207,13 +207,15 @@ const AdminPosts = () => {
   };
 
   const handleEdit = (post) => {
+    const resolvedType = postTypes.includes(post.type) ? post.type : 'news';
+
     setEditingId(post._id);
     setFieldErrors({});
     setStatus({ type: '', text: '' });
     setForm({
       title: post.title || '',
       slug: post.slug || '',
-      type: post.type || 'news',
+      type: resolvedType,
       excerpt: post.excerpt || '',
       featuredImageUrl: post.featuredImageUrl || '',
       imageUrlsText: Array.isArray(post.imageUrls) ? post.imageUrls.join('\n') : '',
