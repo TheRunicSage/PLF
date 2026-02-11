@@ -18,6 +18,9 @@ const Donate = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const qrUrls = settings.donationQrImageUrls.length === 0 ? DEFAULT_QR_URLS : settings.donationQrImageUrls;
+  const hasBankDetails = Boolean(settings.donationBankDetails?.trim());
+  const hasQrDetails = qrUrls.length > 0;
+  const hasDonateDetails = hasBankDetails || hasQrDetails;
 
   useEffect(() => {
     let mounted = true;
@@ -66,11 +69,11 @@ const Donate = () => {
               <a className="pill-btn btn-primary" href={settings.externalDonateUrl} target="_blank" rel="noreferrer">
                 {copy.donateNowLabel}
               </a>
-            ) : (
+            ) : !hasDonateDetails ? (
               <button type="button" className="pill-btn btn-primary" disabled>
                 {copy.donatePendingLabel}
               </button>
-            )}
+            ) : null}
           </Reveal>
         </div>
       </section>

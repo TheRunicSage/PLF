@@ -222,6 +222,9 @@ const Home = () => {
   const qrUrls = settingsState.donationQrImageUrls.length === 0
     ? DEFAULT_QR_URLS
     : settingsState.donationQrImageUrls;
+  const hasBankDetails = Boolean(settingsState.donationBankDetails?.trim());
+  const hasQrDetails = qrUrls.length > 0;
+  const hasDonateDetails = hasBankDetails || hasQrDetails;
 
   return (
     <div className="home-page">
@@ -302,11 +305,11 @@ const Home = () => {
                     <a className="pill-btn btn-primary" href={settingsState.externalDonateUrl} target="_blank" rel="noreferrer">
                       {copy.donateBanner.donateLinkLabel}
                     </a>
-                  ) : (
+                  ) : !hasDonateDetails ? (
                     <button type="button" className="pill-btn btn-primary" disabled>
                       {copy.donateBanner.donateLinkPendingLabel}
                     </button>
-                  )}
+                  ) : null}
                 </div>
 
                 <div className="donate-card__grid">
