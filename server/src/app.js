@@ -74,8 +74,8 @@ export const createApp = () => {
     })
   );
 
-  app.use(express.json({ limit: '100kb' }));
-  app.use(express.urlencoded({ extended: true, limit: '100kb' }));
+  app.use(express.json({ limit: '6mb' }));
+  app.use(express.urlencoded({ extended: true, limit: '6mb' }));
 
   app.get('/api/health', (_req, res) => {
     return sendSuccess(res, { status: 'ok' });

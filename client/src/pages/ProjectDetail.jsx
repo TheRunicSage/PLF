@@ -1,9 +1,11 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import ImageCarousel from '../components/common/ImageCarousel.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { mergeImageUrls } from '../utils/media.js';
 
 const formatDate = (value) => {
   if (!value) {
@@ -29,6 +31,10 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const projectImages = useMemo(
+    () => mergeImageUrls(project?.thumbnailUrl, project?.imageUrls),
+    [project]
+  );
 
   useEffect(() => {
     let mounted = true;
@@ -84,8 +90,12 @@ const ProjectDetail = () => {
           {!loading && !error && project && (
             <Reveal className="detail-layout">
               <article className="card detail-card">
-                {project.thumbnailUrl ? (
-                  <img src={project.thumbnailUrl} alt={project.title} loading="lazy" />
+                {projectImages.length > 0 ? (
+                  <ImageCarousel
+                    images={projectImages}
+                    altBase={project.title}
+                    className="detail-carousel"
+                  />
                 ) : (
                   <div className="media-placeholder media-placeholder--blue" aria-hidden="true" />
                 )}

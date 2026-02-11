@@ -1,10 +1,12 @@
-﻿import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import ImageCarousel from '../components/common/ImageCarousel.jsx';
 import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { mergeImageUrls } from '../utils/media.js';
 import { getVideoEmbedData } from '../utils/videoEmbed.js';
 
 const formatDate = (value) => {
@@ -105,6 +107,7 @@ const BlogDetail = () => {
     () => (post?.publishedAt ? formatDate(post.publishedAt) : formatDate(post?.createdAt)),
     [post]
   );
+  const postImages = useMemo(() => mergeImageUrls(post?.featuredImageUrl, post?.imageUrls), [post]);
   const videoEmbedData = useMemo(() => getVideoEmbedData(post?.videoUrl), [post?.videoUrl]);
 
   return (
@@ -125,8 +128,12 @@ const BlogDetail = () => {
           {!loading && !error && post && (
             <Reveal className="detail-layout">
               <article className="card detail-card">
-                {post.featuredImageUrl ? (
-                  <img src={post.featuredImageUrl} alt={post.title} loading="lazy" />
+                {postImages.length > 0 ? (
+                  <ImageCarousel
+                    images={postImages}
+                    altBase={post.title}
+                    className="detail-carousel"
+                  />
                 ) : (
                   <div className="media-placeholder media-placeholder--olive" aria-hidden="true" />
                 )}

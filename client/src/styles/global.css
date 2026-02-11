@@ -1066,6 +1066,12 @@ button:disabled,
   min-height: 240px;
 }
 
+.featured-project-card > img {
+  width: 100%;
+  min-height: 240px;
+  object-fit: cover;
+}
+
 .featured-project-card__content {
   padding: clamp(1rem, 3vw, 1.6rem);
 }
@@ -1168,6 +1174,15 @@ button:disabled,
   min-height: 240px;
 }
 
+.detail-carousel {
+  border-radius: 0;
+}
+
+.detail-carousel .image-carousel__viewport {
+  border-radius: 0;
+  border: 0;
+}
+
 .detail-card__body {
   padding: 1.1rem;
   display: grid;
@@ -1196,6 +1211,78 @@ button:disabled,
   border-radius: var(--radius-sm);
   padding: 0.9rem;
   background: var(--surface-alt);
+}
+
+.image-carousel {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.image-carousel__viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.image-carousel__viewport img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 240ms ease, opacity 220ms ease;
+}
+
+.image-carousel__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(14, 24, 38, 0.66);
+  color: #fff;
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 220ms ease, background-color 220ms ease;
+}
+
+.image-carousel__nav:hover {
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(14, 24, 38, 0.85);
+}
+
+.image-carousel__nav--prev {
+  left: 0.55rem;
+}
+
+.image-carousel__nav--next {
+  right: 0.55rem;
+}
+
+.image-carousel__dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.image-carousel__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 75%, #9098a3);
+  background: transparent;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.image-carousel__dot.is-active {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 .donate-hero {
@@ -1404,6 +1491,40 @@ textarea {
 
 .admin-list__item h3 {
   font-size: 1rem;
+}
+
+.admin-image-preview-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.admin-image-preview {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.admin-image-preview img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-image-preview__meta {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.admin-image-preview__meta .pill-btn {
+  min-height: 34px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
 }
 
 .action-row {

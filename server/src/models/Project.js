@@ -29,6 +29,10 @@ const projectSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    imageUrls: {
+      type: [String],
+      default: [],
+    },
     status: {
       type: String,
       enum: ['ongoing', 'completed', 'upcoming'],

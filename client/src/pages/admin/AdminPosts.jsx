@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Reveal from '../../components/motion/Reveal.jsx';
@@ -9,6 +9,8 @@ import {
   getAuthHeaders,
   isUnauthorizedError,
 } from '../../config.js';
+import { filesToOptimizedDataUrls } from '../../utils/imageFiles.js';
+import { mergeImageUrls, parseImageLines } from '../../utils/media.js';
 import { toKebabCase } from '../../utils/slugify.js';
 
 const postTypes = ['news', 'story', 'blog', 'press', 'event'];
@@ -18,6 +20,8 @@ const initialForm = {
   slug: '',
   type: 'news',
   excerpt: '',
+  featuredImageUrl: '',
+  imageUrlsText: '',
   videoUrl: '',
   content: '',
   published: false,
@@ -32,9 +36,10 @@ const AdminPosts = () => {
   const [fieldErrors, setFieldErrors] = useState({});
   const [editingId, setEditingId] = useState('');
   const [status, setStatus] = useState({ type: '', text: '' });
+  const [isUploadingImages, setIsUploadingImages] = useState(false);
 
   const queryString = useMemo(() => {
-    const query = new URLSearchParams({ page: '1', limit: '50' });
+    const query = new URLSearchParams({ page: '1', limit: '200' });
 
     if (search.trim()) {
       query.set('search', search.trim());
@@ -47,6 +52,10 @@ const AdminPosts = () => {
     return query.toString();
   }, [search, filterType]);
 
+  const galleryImages = useMemo(() => {
+    return mergeImageUrls(form.featuredImageUrl, parseImageLines(form.imageUrlsText));
+  }, [form.featuredImageUrl, form.imageUrlsText]);
+
   const handleUnauthorized = () => {
     clearAuthToken();
     navigate('/admin/login', { replace: true, state: { reason: 'expired' } });
@@ -58,7 +67,7 @@ const AdminPosts = () => {
         headers: getAuthHeaders(),
       });
 
-      setPosts(response.data?.items || []);
+      setPosts(Array.isArray(response.data?.items) ? response.data.items : []);
     } catch (error) {
       if (isUnauthorizedError(error)) {
         handleUnauthorized();
@@ -90,18 +99,76 @@ const AdminPosts = () => {
     setEditingId('');
   };
 
+  const handlePostImageUpload = async (event) => {
+    const files = event.target.files;
+
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    setIsUploadingImages(true);
+    setStatus({ type: '', text: '' });
+
+    try {
+      const existing = parseImageLines(form.imageUrlsText);
+      const remainingSlots = Math.max(0, 12 - existing.length);
+
+      if (remainingSlots === 0) {
+        setStatus({ type: 'error', text: 'You can add up to 12 gallery images per post.' });
+        return;
+      }
+
+      const uploaded = await filesToOptimizedDataUrls(files, { maxFiles: remainingSlots });
+      const merged = mergeImageUrls(existing, uploaded).slice(0, 12);
+
+      setForm((prev) => ({
+        ...prev,
+        imageUrlsText: merged.join('\n'),
+        featuredImageUrl: prev.featuredImageUrl.trim() || merged[0] || '',
+      }));
+      setFieldErrors((prev) => ({ ...prev, imageUrls: '', featuredImageUrl: '' }));
+      setStatus({ type: 'success', text: `${uploaded.length} image(s) added.` });
+    } catch (error) {
+      setStatus({ type: 'error', text: error.message || 'Unable to upload selected images.' });
+    } finally {
+      setIsUploadingImages(false);
+      event.target.value = '';
+    }
+  };
+
+  const handleRemoveGalleryImage = (imageUrl) => {
+    const gallery = parseImageLines(form.imageUrlsText).filter((entry) => entry !== imageUrl);
+
+    setForm((prev) => {
+      const nextFeatured = prev.featuredImageUrl.trim() === imageUrl
+        ? gallery[0] || ''
+        : prev.featuredImageUrl;
+
+      return {
+        ...prev,
+        featuredImageUrl: nextFeatured,
+        imageUrlsText: gallery.join('\n'),
+      };
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFieldErrors({});
     setStatus({ type: '', text: '' });
 
     try {
+      const imageUrls = parseImageLines(form.imageUrlsText);
       const resolvedSlug = form.slug.trim() || toKebabCase(form.title);
+      const resolvedFeaturedImage = form.featuredImageUrl.trim() || imageUrls[0] || '';
+
       const payload = {
         title: form.title,
         slug: resolvedSlug,
         type: form.type,
         excerpt: form.excerpt,
+        featuredImageUrl: resolvedFeaturedImage,
+        imageUrls,
         videoUrl: form.videoUrl,
         content: form.content,
         published: form.published,
@@ -148,6 +215,8 @@ const AdminPosts = () => {
       slug: post.slug || '',
       type: post.type || 'news',
       excerpt: post.excerpt || '',
+      featuredImageUrl: post.featuredImageUrl || '',
+      imageUrlsText: Array.isArray(post.imageUrls) ? post.imageUrls.join('\n') : '',
       videoUrl: post.videoUrl || '',
       content: post.content || '',
       published: Boolean(post.published),
@@ -190,7 +259,7 @@ const AdminPosts = () => {
               <div>
                 <p className="kicker">Admin</p>
                 <h1 className="headline-md">Manage posts</h1>
-                <p className="muted-text">Create and curate blog, press, and event updates.</p>
+                <p className="muted-text">Create and curate updates with video links and image galleries.</p>
               </div>
               <nav className="admin-nav">
                 <Link className="pill-btn btn-ghost" to="/admin">Dashboard</Link>
@@ -256,6 +325,63 @@ const AdminPosts = () => {
                 </div>
 
                 <div className="form-field">
+                  <label htmlFor="post-featured-image">Primary image URL (optional)</label>
+                  <input
+                    id="post-featured-image"
+                    name="featuredImageUrl"
+                    value={form.featuredImageUrl}
+                    onChange={handleFormChange}
+                    placeholder="https://... (auto-filled from first gallery image if empty)"
+                  />
+                  {fieldErrors.featuredImageUrl && <p className="field-error">{fieldErrors.featuredImageUrl}</p>}
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="post-images-upload">Upload post photos</label>
+                  <input
+                    id="post-images-upload"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handlePostImageUpload}
+                    disabled={isUploadingImages}
+                  />
+                  <p className="meta">Images are optimized before save. Max 12 images per post.</p>
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="post-gallery-urls">Gallery image URLs (one per line)</label>
+                  <textarea
+                    id="post-gallery-urls"
+                    name="imageUrlsText"
+                    value={form.imageUrlsText}
+                    onChange={handleFormChange}
+                    placeholder={'https://.../image-1.jpg\nhttps://.../image-2.jpg'}
+                  />
+                  {fieldErrors.imageUrls && <p className="field-error">{fieldErrors.imageUrls}</p>}
+                </div>
+
+                {galleryImages.length > 0 && (
+                  <div className="admin-image-preview-grid">
+                    {galleryImages.map((imageUrl, index) => (
+                      <article key={`${imageUrl}-${index}`} className="admin-image-preview">
+                        <img src={imageUrl} alt={`Post gallery ${index + 1}`} loading="lazy" />
+                        <div className="admin-image-preview__meta">
+                          {index === 0 ? <span className="meta">Primary</span> : <span className="meta">Gallery</span>}
+                          <button
+                            type="button"
+                            className="pill-btn btn-danger"
+                            onClick={() => handleRemoveGalleryImage(imageUrl)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                )}
+
+                <div className="form-field">
                   <label htmlFor="post-video-url">Video URL (optional)</label>
                   <input
                     id="post-video-url"
@@ -292,7 +418,7 @@ const AdminPosts = () => {
                 {fieldErrors.published && <p className="field-error">{fieldErrors.published}</p>}
 
                 <div className="action-row">
-                  <button type="submit" className="pill-btn btn-primary">
+                  <button type="submit" className="pill-btn btn-primary" disabled={isUploadingImages}>
                     {editingId ? 'Update post' : 'Create post'}
                   </button>
                   {editingId && (
@@ -321,6 +447,8 @@ const AdminPosts = () => {
                 </select>
               </div>
 
+              {posts.length === 0 && <p className="muted-text">No posts found for this filter.</p>}
+
               <Stagger className="admin-list" delayChildren={0.03}>
                 {posts.map((post) => (
                   <article className="admin-list__item" key={post._id}>
@@ -328,6 +456,9 @@ const AdminPosts = () => {
                       <h3>{post.title}</h3>
                       <p className="meta">{post.type} | {post.published ? 'Published' : 'Draft'}</p>
                       <p className="meta">/{post.slug}</p>
+                      {Array.isArray(post.imageUrls) && post.imageUrls.length > 0 && (
+                        <p className="meta">{post.imageUrls.length} gallery image(s)</p>
+                      )}
                     </div>
                     <div className="action-row">
                       <button type="button" className="pill-btn btn-ghost" onClick={() => handleEdit(post)}>
@@ -349,4 +480,3 @@ const AdminPosts = () => {
 };
 
 export default AdminPosts;
-

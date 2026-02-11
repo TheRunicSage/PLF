@@ -34,6 +34,10 @@ const postSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    imageUrls: {
+      type: [String],
+      default: [],
+    },
     videoUrl: {
       type: String,
       trim: true,

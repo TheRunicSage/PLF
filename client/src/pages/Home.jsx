@@ -6,6 +6,7 @@ import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { getPrimaryImage } from '../utils/media.js';
 import { getVideoEmbedData } from '../utils/videoEmbed.js';
 
 const DEFAULT_QR_URLS = ['/assets/donate/gpay-upi-qr.png'];
@@ -219,6 +220,10 @@ const Home = () => {
   }, [copy.errors.events, copy.errors.posts, copy.errors.projects, copy.errors.settings]);
 
   const featuredProject = useMemo(() => projectsState.items[0] || null, [projectsState.items]);
+  const featuredProjectImage = useMemo(
+    () => getPrimaryImage(featuredProject?.thumbnailUrl, featuredProject?.imageUrls),
+    [featuredProject]
+  );
   const qrUrls = settingsState.donationQrImageUrls.length === 0
     ? DEFAULT_QR_URLS
     : settingsState.donationQrImageUrls;
@@ -485,7 +490,15 @@ const Home = () => {
 
           {!projectsState.loading && !projectsState.error && featuredProject && (
             <Reveal className="featured-project-card" delay={0.08}>
-              <div className="media-placeholder media-placeholder--blue" aria-hidden="true" />
+              {featuredProjectImage ? (
+                <img
+                  src={featuredProjectImage}
+                  alt={featuredProject.title}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="media-placeholder media-placeholder--blue" aria-hidden="true" />
+              )}
               <div className="featured-project-card__content">
                 <p className="kicker">{featuredProject.status}</p>
                 <h3>{featuredProject.title}</h3>
@@ -519,21 +532,25 @@ const Home = () => {
           {!postsState.loading && !postsState.error && postsState.items.length > 0 && (
             <ScrollReveal threshold={0.15} retractOnScrollUp={false}>
               <Stagger className="news-grid">
-                {postsState.items.map((post) => (
-                  <article key={post._id} className="news-card">
-                    {post.featuredImageUrl ? (
-                      <img src={post.featuredImageUrl} alt={post.title} loading="lazy" />
-                    ) : (
-                      <div className="media-placeholder media-placeholder--mint" aria-hidden="true" />
-                    )}
-                    <div className="news-card__body">
-                      <p className="meta">{post.type} | {formatDate(post.publishedAt || post.createdAt)}</p>
-                      <h3>{post.title}</h3>
-                      <p>{post.excerpt || copy.latestUpdates.excerptFallback}</p>
-                      <Link className="pill-btn btn-ghost" to={`/blog/${post.slug}`}>{copy.latestUpdates.ctaLabel}</Link>
-                    </div>
-                  </article>
-                ))}
+                {postsState.items.map((post) => {
+                  const postImage = getPrimaryImage(post.featuredImageUrl, post.imageUrls);
+
+                  return (
+                    <article key={post._id} className="news-card">
+                      {postImage ? (
+                        <img src={postImage} alt={post.title} loading="lazy" />
+                      ) : (
+                        <div className="media-placeholder media-placeholder--mint" aria-hidden="true" />
+                      )}
+                      <div className="news-card__body">
+                        <p className="meta">{post.type} | {formatDate(post.publishedAt || post.createdAt)}</p>
+                        <h3>{post.title}</h3>
+                        <p>{post.excerpt || copy.latestUpdates.excerptFallback}</p>
+                        <Link className="pill-btn btn-ghost" to={`/blog/${post.slug}`}>{copy.latestUpdates.ctaLabel}</Link>
+                      </div>
+                    </article>
+                  );
+                })}
               </Stagger>
             </ScrollReveal>
           )}

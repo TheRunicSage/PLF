@@ -6,6 +6,7 @@ import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { getPrimaryImage } from '../utils/media.js';
 
 const POSTS_PER_PAGE = 6;
 
@@ -154,24 +155,28 @@ const BlogList = () => {
             <>
               <ScrollReveal threshold={0.15} retractOnScrollUp={false}>
                 <Stagger className="content-grid content-grid--three">
-                  {posts.map((post) => (
-                    <article key={post._id} className="card blog-card">
-                      {post.featuredImageUrl ? (
-                        <img src={post.featuredImageUrl} alt={post.title} loading="lazy" />
-                      ) : (
-                        <div className="media-placeholder media-placeholder--sun" aria-hidden="true" />
-                      )}
-                      <div className="blog-card__body">
-                        <p className="kicker">{post.type}</p>
-                        <h2>{post.title}</h2>
-                        <p className="meta">{formatDate(post.publishedAt || post.createdAt)}</p>
-                        <p>{post.excerpt || copy.excerptFallback}</p>
-                        <Link className="pill-btn btn-ghost" to={`/blog/${post.slug}`}>
-                          {copy.readMoreLabel}
-                        </Link>
-                      </div>
-                    </article>
-                  ))}
+                  {posts.map((post) => {
+                    const postImage = getPrimaryImage(post.featuredImageUrl, post.imageUrls);
+
+                    return (
+                      <article key={post._id} className="card blog-card">
+                        {postImage ? (
+                          <img src={postImage} alt={post.title} loading="lazy" />
+                        ) : (
+                          <div className="media-placeholder media-placeholder--sun" aria-hidden="true" />
+                        )}
+                        <div className="blog-card__body">
+                          <p className="kicker">{post.type}</p>
+                          <h2>{post.title}</h2>
+                          <p className="meta">{formatDate(post.publishedAt || post.createdAt)}</p>
+                          <p>{post.excerpt || copy.excerptFallback}</p>
+                          <Link className="pill-btn btn-ghost" to={`/blog/${post.slug}`}>
+                            {copy.readMoreLabel}
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
                 </Stagger>
               </ScrollReveal>
 

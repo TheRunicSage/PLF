@@ -12,6 +12,50 @@ import { validateProjectInput } from '../utils/validate.js';
 
 const router = express.Router();
 
+const normalizeString = (value) => (typeof value === 'string' ? value.trim() : value);
+const normalizeStringArray = (value) => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      value
+        .map((item) => (typeof item === 'string' ? item.trim() : ''))
+        .filter(Boolean)
+    )
+  );
+};
+
+const normalizeProjectPayload = (payload = {}, { isUpdate = false } = {}) => {
+  const normalized = {
+    ...payload,
+    title: normalizeString(payload.title),
+    slug: normalizeString(payload.slug),
+    shortDescription: normalizeString(payload.shortDescription),
+    longDescription: typeof payload.longDescription === 'string' ? payload.longDescription.trim() : payload.longDescription,
+    status: normalizeString(payload.status),
+  };
+
+  if (!isUpdate || Object.prototype.hasOwnProperty.call(payload, 'imageUrls')) {
+    normalized.imageUrls = normalizeStringArray(payload.imageUrls);
+  }
+
+  if (!isUpdate || Object.prototype.hasOwnProperty.call(payload, 'thumbnailUrl')) {
+    normalized.thumbnailUrl = normalizeString(payload.thumbnailUrl) || '';
+  }
+
+  if (
+    Array.isArray(normalized.imageUrls)
+    && normalized.imageUrls.length > 0
+    && (!normalized.thumbnailUrl || normalized.thumbnailUrl.length === 0)
+  ) {
+    normalized.thumbnailUrl = normalized.imageUrls[0];
+  }
+
+  return normalized;
+};
+
 router.get('/projects', getPublicProjects);
 router.get('/projects/:slug', getPublicProjectBySlug);
 
@@ -55,13 +99,14 @@ router.get('/admin/projects', authMiddleware, async (req, res, next) => {
 
 router.post('/admin/projects', authMiddleware, async (req, res, next) => {
   try {
-    const validation = validateProjectInput(req.body);
+    const payload = normalizeProjectPayload(req.body, { isUpdate: false });
+    const validation = validateProjectInput(payload);
 
     if (!validation.isValid) {
       return sendError(res, 400, 'Validation failed', validation.details);
     }
 
-    const project = await Project.create(req.body);
+    const project = await Project.create(payload);
 
     return sendSuccess(res, project, 201);
   } catch (error) {
@@ -79,7 +124,8 @@ router.put('/admin/projects/:id', authMiddleware, async (req, res, next) => {
       return sendError(res, 400, 'Invalid project id.');
     }
 
-    const validation = validateProjectInput(req.body);
+    const payload = normalizeProjectPayload(req.body, { isUpdate: true });
+    const validation = validateProjectInput(payload);
 
     if (!validation.isValid) {
       return sendError(res, 400, 'Validation failed', validation.details);
@@ -91,7 +137,7 @@ router.put('/admin/projects/:id', authMiddleware, async (req, res, next) => {
       return sendError(res, 404, 'Project not found.');
     }
 
-    Object.assign(project, req.body);
+    Object.assign(project, payload);
     await project.save();
 
     return sendSuccess(res, project);

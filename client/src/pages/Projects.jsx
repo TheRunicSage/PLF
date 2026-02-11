@@ -6,6 +6,7 @@ import Reveal from '../components/motion/Reveal.jsx';
 import Stagger from '../components/motion/Stagger.jsx';
 import { apiRequest } from '../config.js';
 import { siteCopy } from '../content/siteCopy.js';
+import { getPrimaryImage } from '../utils/media.js';
 
 const statuses = ['all', 'ongoing', 'completed', 'upcoming'];
 
@@ -107,10 +108,13 @@ const Projects = () => {
           {!loading && !error && projects.length > 0 && (
             <ScrollReveal threshold={0.15} retractOnScrollUp={false}>
               <Stagger className="content-grid content-grid--three">
-                {projects.map((project) => (
+                {projects.map((project) => {
+                  const projectImage = getPrimaryImage(project.thumbnailUrl, project.imageUrls);
+
+                  return (
                   <article className="card project-card" key={project._id}>
-                    {project.thumbnailUrl ? (
-                      <img src={project.thumbnailUrl} alt={project.title} loading="lazy" />
+                    {projectImage ? (
+                      <img src={projectImage} alt={project.title} loading="lazy" />
                     ) : (
                       <div className="media-placeholder media-placeholder--mint" aria-hidden="true" />
                     )}
@@ -124,7 +128,8 @@ const Projects = () => {
                       </Link>
                     </div>
                   </article>
-                ))}
+                  );
+                })}
               </Stagger>
             </ScrollReveal>
           )}

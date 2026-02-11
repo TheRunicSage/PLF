@@ -13,6 +13,54 @@ import { validatePostInput } from '../utils/validate.js';
 
 const router = express.Router();
 
+const normalizeString = (value) => (typeof value === 'string' ? value.trim() : value);
+const normalizeStringArray = (value) => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      value
+        .map((item) => (typeof item === 'string' ? item.trim() : ''))
+        .filter(Boolean)
+    )
+  );
+};
+
+const normalizePostPayload = (payload = {}, { isUpdate = false } = {}) => {
+  const normalized = {
+    ...payload,
+    title: normalizeString(payload.title),
+    slug: normalizeString(payload.slug),
+    type: normalizeString(payload.type),
+    excerpt: normalizeString(payload.excerpt),
+    content: typeof payload.content === 'string' ? payload.content.trim() : payload.content,
+    videoUrl: normalizeString(payload.videoUrl),
+    location: normalizeString(payload.location),
+    categories: Array.isArray(payload.categories) ? normalizeStringArray(payload.categories) : payload.categories,
+    tags: Array.isArray(payload.tags) ? normalizeStringArray(payload.tags) : payload.tags,
+  };
+
+  if (!isUpdate || Object.prototype.hasOwnProperty.call(payload, 'imageUrls')) {
+    normalized.imageUrls = normalizeStringArray(payload.imageUrls);
+  }
+
+  if (!isUpdate || Object.prototype.hasOwnProperty.call(payload, 'featuredImageUrl')) {
+    normalized.featuredImageUrl = normalizeString(payload.featuredImageUrl) || '';
+  }
+
+  if (
+    Array.isArray(normalized.imageUrls)
+    && normalized.imageUrls.length > 0
+    && (!normalized.featuredImageUrl || normalized.featuredImageUrl.length === 0)
+  ) {
+    normalized.featuredImageUrl = normalized.imageUrls[0];
+  }
+
+  return normalized;
+};
+
 router.get('/posts', getPublicPosts);
 router.get('/posts/:slug', getPublicPostBySlug);
 router.get('/events/upcoming', getUpcomingEvents);
@@ -65,13 +113,14 @@ router.get('/admin/posts', authMiddleware, async (req, res, next) => {
 
 router.post('/admin/posts', authMiddleware, async (req, res, next) => {
   try {
-    const validation = validatePostInput(req.body, { isUpdate: false });
+    const payload = normalizePostPayload(req.body, { isUpdate: false });
+    const validation = validatePostInput(payload, { isUpdate: false });
 
     if (!validation.isValid) {
       return sendError(res, 400, 'Validation failed', validation.details);
     }
 
-    const post = await Post.create(req.body);
+    const post = await Post.create(payload);
 
     return sendSuccess(res, post, 201);
   } catch (error) {
@@ -89,7 +138,8 @@ router.put('/admin/posts/:id', authMiddleware, async (req, res, next) => {
       return sendError(res, 400, 'Invalid post id.');
     }
 
-    const validation = validatePostInput(req.body, { isUpdate: true });
+    const payload = normalizePostPayload(req.body, { isUpdate: true });
+    const validation = validatePostInput(payload, { isUpdate: true });
 
     if (!validation.isValid) {
       return sendError(res, 400, 'Validation failed', validation.details);
@@ -101,7 +151,7 @@ router.put('/admin/posts/:id', authMiddleware, async (req, res, next) => {
       return sendError(res, 404, 'Post not found.');
     }
 
-    Object.assign(post, req.body);
+    Object.assign(post, payload);
     await post.save();
 
     return sendSuccess(res, post);
