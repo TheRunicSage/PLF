@@ -451,7 +451,7 @@ const AdminPosts = () => {
 
               {posts.length === 0 && <p className="muted-text">No posts found for this filter.</p>}
 
-              <Stagger className="admin-list" delayChildren={0.03}>
+              <Stagger className="admin-list" delayChildren={0.03} revealOnView={false}>
                 {posts.map((post) => (
                   <article className="admin-list__item" key={post._id}>
                     <div>

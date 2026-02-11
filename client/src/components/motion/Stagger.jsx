@@ -4,7 +4,12 @@ import { motion } from 'framer-motion';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.js';
 import { motionTokens } from './motionTokens.js';
 
-const Stagger = ({ children, className = '', delayChildren = 0 }) => {
+const Stagger = ({
+  children,
+  className = '',
+  delayChildren = 0,
+  revealOnView = true,
+}) => {
   const reducedMotion = usePrefersReducedMotion();
   const childArray = Children.toArray(children);
 
@@ -16,7 +21,8 @@ const Stagger = ({ children, className = '', delayChildren = 0 }) => {
     <motion.div
       className={className}
       initial="hidden"
-      whileInView="show"
+      animate={revealOnView ? undefined : 'show'}
+      whileInView={revealOnView ? 'show' : undefined}
       viewport={{ once: true, margin: '-8% 0px' }}
       variants={{
         hidden: {},

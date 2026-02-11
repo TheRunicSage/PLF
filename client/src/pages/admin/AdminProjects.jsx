@@ -434,7 +434,7 @@ const AdminProjects = () => {
 
               {projects.length === 0 && <p className="muted-text">No projects found for this filter.</p>}
 
-              <Stagger className="admin-list" delayChildren={0.03}>
+              <Stagger className="admin-list" delayChildren={0.03} revealOnView={false}>
                 {projects.map((project) => (
                   <article className="admin-list__item" key={project._id}>
                     <div>
