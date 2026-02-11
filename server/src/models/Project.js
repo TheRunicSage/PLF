@@ -64,7 +64,6 @@ projectSchema.pre('validate', function setSlug(next) {
   next();
 });
 
-projectSchema.index({ slug: 1 }, { unique: true });
 projectSchema.index({ status: 1, createdAt: -1 });
 projectSchema.index({ isHighlighted: 1, createdAt: -1 });
 

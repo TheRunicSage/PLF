@@ -330,33 +330,6 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section ways-section">
-        <div className="container-wide">
-          <div className="split-head">
-            <Reveal>
-              <p className="kicker">{copy.waysToHelp.kicker}</p>
-              <h2 className="headline-lg">{copy.waysToHelp.title}</h2>
-            </Reveal>
-            <Reveal>
-              <p className="lead">{copy.waysToHelp.description}</p>
-            </Reveal>
-          </div>
-
-          <Stagger className="ways-grid">
-            {copy.waysToHelp.cards.map((item) => (
-              <article key={item.title} className="card-media">
-                <div className={`media-placeholder ${item.mediaClass}`} aria-hidden="true" />
-                <div className="card-media__overlay">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <Link className="pill-btn btn-ghost" to={item.to}>{copy.waysToHelp.exploreLabel}</Link>
-                </div>
-              </article>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
       <section className="section events-section">
         <div className="container-wide">
           <div className="split-head split-head--compact">
@@ -367,6 +340,9 @@ const Home = () => {
               <Link className="pill-btn btn-ghost" to="/blog?type=event">{copy.events.seeAllLabel}</Link>
             </Reveal>
           </div>
+          <Reveal>
+            <p className="lead">{copy.events.description}</p>
+          </Reveal>
 
           {eventsState.loading && <p className="muted-text">{copy.events.loading}</p>}
           {!eventsState.loading && eventsState.error && <p className="status error">{eventsState.error}</p>}
@@ -401,6 +377,46 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="section section--tight cta-banner">
+        <div className="container-wide">
+          <Reveal className="cta-banner__content">
+            <h2 className="headline-md">{copy.ctaBanner.title}</h2>
+            <p className="lead">{copy.ctaBanner.description}</p>
+            <div className="hero-actions">
+              <Link className="pill-btn btn-primary" to={copy.ctaBanner.primaryCta.to}>{copy.ctaBanner.primaryCta.label}</Link>
+              <Link className="pill-btn btn-ghost" to={copy.ctaBanner.secondaryCta.to}>{copy.ctaBanner.secondaryCta.label}</Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section ways-section">
+        <div className="container-wide">
+          <div className="split-head">
+            <Reveal>
+              <p className="kicker">{copy.waysToHelp.kicker}</p>
+              <h2 className="headline-lg">{copy.waysToHelp.title}</h2>
+            </Reveal>
+            <Reveal>
+              <p className="lead">{copy.waysToHelp.description}</p>
+            </Reveal>
+          </div>
+
+          <Stagger className="ways-grid">
+            {copy.waysToHelp.cards.map((item) => (
+              <article key={item.title} className="card-media">
+                <div className={`media-placeholder ${item.mediaClass}`} aria-hidden="true" />
+                <div className="card-media__overlay">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <Link className="pill-btn btn-ghost" to={item.to}>{copy.waysToHelp.exploreLabel}</Link>
+                </div>
+              </article>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
       <section className="section video-section">
         <div className="container-wide">
           <Reveal>
@@ -412,7 +428,7 @@ const Home = () => {
               <article key={item.title} className="video-card">
                 <div className="video-card__media">
                   <div className={`media-placeholder ${item.mediaClass}`} aria-hidden="true" />
-                  <div className="video-card__overlay" aria-hidden="true">{copy.videos.playLabel}</div>
+                  <div className="video-card__overlay" aria-hidden="true" />
                 </div>
                 <h3>{item.title}</h3>
               </article>
@@ -490,18 +506,6 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section section--tight cta-banner">
-        <div className="container-wide">
-          <Reveal className="cta-banner__content">
-            <h2 className="headline-md">{copy.ctaBanner.title}</h2>
-            <p className="lead">{copy.ctaBanner.description}</p>
-            <div className="hero-actions">
-              <Link className="pill-btn btn-primary" to={copy.ctaBanner.primaryCta.to}>{copy.ctaBanner.primaryCta.label}</Link>
-              <Link className="pill-btn btn-ghost" to={copy.ctaBanner.secondaryCta.to}>{copy.ctaBanner.secondaryCta.label}</Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 };

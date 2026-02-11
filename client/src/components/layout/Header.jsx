@@ -11,6 +11,7 @@ const Header = () => {
   const [openDropdown, setOpenDropdown] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const brand = siteCopy.global.brand;
   const directLinks = siteCopy.nav.directLinks;
   const dropdownGroups = siteCopy.nav.dropdownGroups;
 
@@ -57,7 +58,16 @@ const Header = () => {
       <div className="container-wide">
         <div className="pill-nav" aria-label="Main navigation">
           <NavLink to="/" className="pill-nav__brand">
-            <span className="pill-nav__brand-mark">PLF</span>
+            {brand?.logoUrl ? (
+              <img
+                src={brand.logoUrl}
+                alt={brand.logoAlt || `${siteCopy.global.siteName} logo`}
+                className="pill-nav__brand-logo"
+                loading="lazy"
+              />
+            ) : (
+              <span className="pill-nav__brand-mark">PLF</span>
+            )}
             <span className="pill-nav__brand-text">{siteCopy.global.siteName}</span>
           </NavLink>
 

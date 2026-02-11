@@ -1,6 +1,11 @@
 ﻿export const siteCopy = {
   global: {
     siteName: 'Punjab Lit Foundation',
+    brand: {
+      logoUrl:
+        'https://punjablitfoundation.com/wp-content/uploads/2024/03/cropped-PLF-Logo-Photoroom.png',
+      logoAlt: 'Punjab Lit Foundation logo',
+    },
     tagline: 'Enlighten. Connect. Support.',
     shortMission:
       "Celebrating Punjab's literary and cultural heritage while fostering creativity and community-led social action.",
@@ -90,16 +95,16 @@
       kicker: 'Punjab Lit Foundation',
       title: 'Enlighten. Connect. Support.',
       subtitle:
-        "A nonprofit movement celebrating Punjab's literary spirit while building stronger communities through meaningful initiatives.",
+        "Celebrating Punjab's literary and cultural heritage. The Punjab Lit Foundation fosters creativity and uplifts the region's intellectual capacity.",
       primaryCta: { label: 'Donate now', to: '/donate' },
-      secondaryCta: { label: 'Know more', to: '/about' },
+      secondaryCta: { label: 'Know More', to: '/about' },
     },
     mission: {
-      kicker: 'Mission',
-      title: "Celebrating Punjab's literary and cultural heritage with purpose.",
+      kicker: 'About Us',
+      title: 'About Us',
       description:
-        "We promote and cultivate creativity, build the region's creative wealth, and elevate intellectual capacity through knowledge-based narratives and people-led action.",
-      cta: { label: 'About Punjab Lit Foundation', to: '/about' },
+        "Welcome to the Punjab Lit Foundation, a creative endeavor co-founded by esteemed authors Khushwant Singh and Sanna Kaushal. As a non-profit organization, we are committed to fostering knowledge-based narratives and uplifting the cultural and social status of Punjab. Our mission is to promote and cultivate creativity, empower the region to build its creative wealth, and elevate its intellectual capacity to new heights.",
+      cta: { label: 'Know More', to: '/about' },
     },
     story: {
       kicker: 'Our Story',
@@ -114,8 +119,8 @@
       cta: { label: 'Explore initiatives', to: '/projects' },
     },
     donateBanner: {
-      kicker: 'Support the Foundation',
-      title: 'Make your generous donations for the foundation.',
+      kicker: 'Donate',
+      title: 'Donation For Foundation',
       cardTitle: 'Contribute with confidence',
       cardSubtitle:
         'Your support helps sustain literary programs, public conversations, and social campaigns across Punjab.',
@@ -156,7 +161,9 @@
       exploreLabel: 'Explore',
     },
     events: {
-      heading: 'Upcoming events',
+      heading: 'Upcoming Events',
+      description:
+        "Join us for our upcoming events! From exciting workshops to inspiring talks and community gatherings, there's something for everyone.",
       seeAllLabel: 'See all',
       loading: 'Loading upcoming events...',
       empty: 'No upcoming events right now.',
@@ -166,12 +173,12 @@
     videos: {
       heading: 'Video highlights',
       cards: [
-        { title: 'Hoshiarpur Lit Fest conversations', mediaClass: 'media-placeholder--blue' },
-        { title: 'Creative writing workshop moments', mediaClass: 'media-placeholder--olive' },
-        { title: "People's Walk Against Drugs highlights", mediaClass: 'media-placeholder--sun' },
-        { title: 'Mothers Against Drugs awareness session', mediaClass: 'media-placeholder--mint' },
+        { title: "People's Walk Against Drugs yatra", mediaClass: 'media-placeholder--blue' },
+        { title: 'Mothers Against Drugs awareness initiative', mediaClass: 'media-placeholder--olive' },
+        { title: "Living By The Pen: The Writer's Way", mediaClass: 'media-placeholder--sun' },
+        { title: 'Chandigarh Lit Fest conversations', mediaClass: 'media-placeholder--mint' },
       ],
-      playLabel: 'Play',
+      playLabel: 'Play video',
     },
     featuredProject: {
       heading: 'Featured initiative',
@@ -180,7 +187,7 @@
       ctaLabel: 'Read initiative brief',
     },
     latestUpdates: {
-      heading: 'Latest news, events, and stories',
+      heading: 'Latest News',
       description:
         'Follow recent updates from literature programs, community outreach, and social campaigns.',
       loading: 'Loading latest updates...',
@@ -189,10 +196,10 @@
       ctaLabel: 'Read more',
     },
     ctaBanner: {
-      title: 'Join us in celebrating heritage and building change.',
-      description: 'Reach out to collaborate, volunteer, or support Punjab Lit Foundation initiatives.',
+      title: 'Contact Us',
+      description: 'Contact us to learn more about programs and events.',
       primaryCta: { label: 'Contact us', to: '/contact' },
-      secondaryCta: { label: 'View projects', to: '/projects' },
+      secondaryCta: { label: 'Know More', to: '/about' },
     },
     errors: {
       events: 'Unable to load events.',
@@ -211,26 +218,34 @@
     },
     mission: {
       kicker: 'Our mission',
+      title: 'Our mission',
       text:
-        "We strive to promote and cultivate creativity, empower the region to build its creative wealth, and elevate Punjab's intellectual capacity through knowledge-based narratives.",
+        "At the Punjab Lit Foundation, our mission is multifaceted: we strive to promote and cultivate creativity, empowering the region to build its creative wealth. Additionally, we are committed to uplifting Punjab's cultural and social status through knowledge-based narratives. By doing so, we aim to elevate the intellectual capacity of the region to new heights, fostering a vibrant and enriched cultural landscape. Join us in our journey to celebrate the richness of Punjab's literary and cultural heritage.",
+      backgroundImageUrl:
+        'https://punjablitfoundation.com/wp-content/uploads/2024/03/DSC02611-1-scaled.jpg',
+      portraitImageUrl:
+        'https://punjablitfoundation.com/wp-content/uploads/2024/03/%E0%A8%B5%E0%A9%B1%E0%A8%A7%E0%A8%A6%E0%A8%BE-%E0%A8%AA%E0%A9%B0%E0%A8%9C%E0%A8%BE%E0%A8%AC-%E0%A8%AA%E0%A9%9C%E0%A9%8D%E0%A8%B9%E0%A8%A6%E0%A8%BE-%E0%A8%AA%E0%A9%B0%E0%A8%9C%E0%A8%BE%E0%A8%AC-2.jpeg',
     },
     leadershipHeading: 'Co-founders',
     leaders: [
       {
-        name: 'Sanna Kaushal',
-        role: 'Co-founder | Author',
-        bio:
-          'Sanna Kaushal advanced major literary initiatives in Punjab, transformed Hoshiarpur Lit Society into Punjab Lit Foundation, and championed Parhada Punjab, Vadhda Punjab with creative writing workshops and mobile libraries.',
-        mediaClass: 'media-placeholder--blue',
-      },
-      {
         name: 'Khushwant Singh',
         role: 'Co-founder | Author, Philanthropist, Creative Activist',
         bio:
-          'Khushwant Singh is known for literary leadership and patronage of the Hoshiarpur Lit Fest. His 100-km walk against drug abuse in December 2023 reflects his commitment to social betterment in Punjab.',
-        mediaClass: 'media-placeholder--olive',
+          "He is distinguished as an author, philanthropist, and creative activist. A literary luminary of contemporary India, he boasts a repertoire of six published works, alongside notable roles as a columnist, editor, and as the State Information Commissioner of Punjab. Singh's patronage of the Hoshiarpur Lit Fest, the preeminent literary gathering of Punjab, underscores his commitment to fostering intellectual discourse within his home state. Renowned for his innovative approach to narrative construction, Singh continues to push the boundaries of creativity in service of Punjab's cultural narrative. Notably, his 100-kilometer walk against drug abuse in December 2023 stands as a testament to his dedication to societal betterment.",
+        imageUrl: 'https://punjablitfoundation.com/wp-content/uploads/2024/03/Khushwant-Singh.jpeg',
+      },
+      {
+        name: 'Sanna Kaushal',
+        role: 'Co-founder | Author',
+        bio:
+          'Her leadership has been instrumental in advancing literary endeavors in Punjab. Notably, she led the transformation of the Hoshiarpur Lit Society into the Punjab Lit Foundation, renowned for organizing prestigious literary events. Additionally, she championed the "Parhada Punjab, Vadhda Punjab" initiative, conducting regular creative writing workshops and establishing two mobile libraries to enhance access to books for citizens. As a published author, Sanna Kaushal has gained recognition for her debut book "Hands That Disobeyed" and has contributed her voice to various topics through her articles in the Hindustan Times column "Spice of Life." Passionate about empowering women, Sanna is dedicated to unveiling the untapped potential within the women of her country, striving to amplify their voices and opportunities.',
+        imageUrl: 'https://punjablitfoundation.com/wp-content/uploads/2024/03/Sanna-Kaushal.jpg',
       },
     ],
+    libraryImageUrl:
+      'https://punjablitfoundation.com/wp-content/uploads/2024/03/IMG-20240326-WA0032.jpg',
+    libraryImageAlt: 'Punjab Lit Foundation library on wheels',
   },
 
   projects: {

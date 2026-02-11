@@ -9,6 +9,14 @@ const Footer = () => {
     <footer className="site-footer">
       <div className="container-wide footer-columns">
         <section>
+          {global.brand?.logoUrl && (
+            <img
+              className="footer-brand-logo"
+              src={global.brand.logoUrl}
+              alt={global.brand.logoAlt || `${global.siteName} logo`}
+              loading="lazy"
+            />
+          )}
           <p className="kicker">{global.siteName}</p>
           <h3>{footer.heading}</h3>
           <p className="muted-text">{footer.description}</p>

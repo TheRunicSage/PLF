@@ -97,7 +97,6 @@ postSchema.pre('save', function setPublishedAt(next) {
   next();
 });
 
-postSchema.index({ slug: 1 }, { unique: true });
 postSchema.index({ published: 1, type: 1, publishedAt: -1 });
 postSchema.index({ published: 1, isFeatured: 1, publishedAt: -1 });
 postSchema.index({ type: 1, eventStartDate: 1, published: 1 });

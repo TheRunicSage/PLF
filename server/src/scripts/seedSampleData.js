@@ -15,140 +15,174 @@ const daysFromNow = (days) => {
   return date;
 };
 
+const brandAssets = {
+  logo:
+    'https://punjablitfoundation.com/wp-content/uploads/2024/03/cropped-PLF-Logo-Photoroom.png',
+  campaignPoster:
+    'https://punjablitfoundation.com/wp-content/uploads/2024/03/20240326_193919_0000.png',
+  eventPoster:
+    'https://punjablitfoundation.com/wp-content/uploads/2024/03/WhatsApp-Image-2024-03-27-at-8.12.07-PM-768x959.jpeg',
+};
+
 const sampleProjects = [
   {
     title: 'Mothers Against Drugs',
     slug: 'mothers-against-drugs',
     shortDescription:
-      'A community-led awareness campaign that equips families to prevent substance abuse.',
+      'Community awareness initiative empowering mothers and families to identify, prevent, and respond to substance abuse risks.',
     longDescription:
-      'This initiative connects mothers, teachers, and volunteers through workshops and local outreach to reduce drug abuse at the neighborhood level.',
+      'Punjab Lit Foundation runs Mothers Against Drugs through school outreach, community sessions, and public dialogue that equips caregivers with practical prevention support.',
     status: 'ongoing',
     isHighlighted: true,
+    thumbnailUrl: brandAssets.campaignPoster,
     startDate: daysFromNow(-45),
   },
   {
     title: 'People\'s Walk Against Drugs',
     slug: 'peoples-walk-against-drugs',
     shortDescription:
-      'Public awareness marches to engage citizens and youth against drug addiction.',
+      'A public-awareness yatra engaging youth, educators, and local communities against drug abuse.',
     longDescription:
-      'The walk brings together schools, local groups, and civic voices to spread anti-drug awareness across multiple towns.',
+      'Inspired by grassroots participation, this yatra connects institutions and citizens through district-level walks and awareness talks.',
     status: 'ongoing',
     isHighlighted: true,
+    thumbnailUrl: brandAssets.eventPoster,
     startDate: daysFromNow(-20),
   },
   {
-    title: 'Seed Sewa',
-    slug: 'seed-sewa',
+    title: 'Seed Sewa and Fertiliser Sewa',
+    slug: 'seed-sewa-and-fertiliser-sewa',
     shortDescription:
-      'Distribution of quality seeds and guidance for small and marginal farmers.',
+      'Relief support for flood-affected farmers through seeds, fertiliser support, and field-level assistance.',
     longDescription:
-      'Seed Sewa supports farmer families with seed kits, practical sessions, and local support networks to improve agricultural resilience.',
-    status: 'upcoming',
+      'These initiatives are focused on helping farmer families recover with timely agricultural inputs and practical support.',
+    status: 'ongoing',
     isHighlighted: true,
-    startDate: daysFromNow(10),
+    thumbnailUrl: brandAssets.campaignPoster,
+    startDate: daysFromNow(-60),
   },
   {
-    title: 'Fertiliser Sewa',
-    slug: 'fertiliser-sewa',
+    title: 'PARHADA PUNJAB VADHDHA PUNJAB',
+    slug: 'parhada-punjab-vadhdha-punjab',
     shortDescription:
-      'Assistance program to provide timely fertiliser access and usage guidance.',
+      'Creative-writing workshops and mobile-library support designed to strengthen reading culture across Punjab.',
     longDescription:
-      'The program helps improve crop outcomes by connecting farmers to resources and safe, efficient fertiliser usage practices.',
+      'This literacy and creativity initiative supports students and communities through workshops, reading circles, and public literary engagement.',
     status: 'upcoming',
-    isHighlighted: false,
+    isHighlighted: true,
+    thumbnailUrl: brandAssets.logo,
     startDate: daysFromNow(20),
   },
 ];
 
 const samplePosts = [
   {
-    title: 'Foundation Launches New Community Awareness Drive',
-    slug: 'foundation-launches-new-community-awareness-drive',
+    title: 'Punjab Lit Foundation launches Mothers Against Drugs at Bullowal, Hoshiarpur',
+    slug: 'plf-launches-mothers-against-drugs-bullowal-hoshiarpur',
     type: 'news',
     excerpt:
-      'A citywide campaign has been launched to build stronger anti-drug awareness in local communities.',
+      'A district-level launch brought educators, volunteers, and families together for practical anti-drug awareness.',
     content:
-      'Punjab Lit Foundation has launched a community awareness drive with volunteers and partner institutions focused on youth safety and prevention.',
+      'The campaign launch focused on prevention, family-led awareness, and sustained local participation through school and community engagement.',
     published: true,
-    publishedAt: daysFromNow(-12),
+    publishedAt: daysFromNow(-28),
     isFeatured: true,
-    categories: ['campaigns'],
-    tags: ['awareness', 'community'],
+    featuredImageUrl: brandAssets.campaignPoster,
+    categories: ['campaigns', 'news'],
+    tags: ['mothers-against-drugs', 'hoshiarpur'],
   },
   {
-    title: 'Volunteer Story: Building Trust Through Local Meetings',
-    slug: 'volunteer-story-building-trust-through-local-meetings',
+    title: 'PARHADA PUNJAB VADHDHA PUNJAB workshop series expands in schools',
+    slug: 'parhada-punjab-vadhdha-punjab-workshops-expand-in-schools',
+    type: 'news',
+    excerpt:
+      'Punjab Lit Foundation expanded its creative-writing and reading workshops to engage more students.',
+    content:
+      'The initiative continues to build reading culture through participatory sessions that encourage expression, language, and creativity.',
+    published: true,
+    publishedAt: daysFromNow(-21),
+    isFeatured: true,
+    featuredImageUrl: brandAssets.logo,
+    categories: ['literary', 'education'],
+    tags: ['parhada-punjab', 'workshops'],
+  },
+  {
+    title: "People's Walk Against Drugs - 3",
+    slug: 'peoples-walk-against-drugs-3',
     type: 'story',
     excerpt:
-      'One volunteer shares how weekly meetings are helping families open difficult conversations.',
+      'Community-led participation continued through another district stage of the anti-drug awareness walk.',
     content:
-      'Through regular street-level meetings, volunteers are creating trusted spaces where families discuss prevention, recovery, and support.',
+      'The campaign momentum continued with strong public participation and outreach focused on prevention and support.',
     published: true,
-    publishedAt: daysFromNow(-9),
-    categories: ['stories'],
-    tags: ['volunteer', 'community'],
+    publishedAt: daysFromNow(-16),
+    featuredImageUrl: brandAssets.campaignPoster,
+    categories: ['relief', 'community'],
+    tags: ['seed-sewa', 'fertiliser-sewa'],
   },
   {
-    title: 'How Community Partnerships Strengthen Anti-Drug Action',
-    slug: 'how-community-partnerships-strengthen-anti-drug-action',
+    title: "Living By The Pen: The Writer's Way | Session recap",
+    slug: 'living-by-the-pen-writers-way-session-recap',
     type: 'blog',
     excerpt:
-      'Collaboration with schools and local groups can amplify impact and continuity.',
+      'Highlights from a literary conversation focused on writing practice, language, and creative discipline.',
     content:
-      'Long-term results come from coordinated action. This note outlines practical steps for schools, local councils, and citizen groups to work together.',
+      'The session featured discussion around storytelling craft, Punjabi literary heritage, and nurturing new voices in the region.',
     published: true,
-    publishedAt: daysFromNow(-5),
+    publishedAt: daysFromNow(-10),
     isFeatured: true,
-    categories: ['insights'],
-    tags: ['partnerships', 'strategy'],
+    featuredImageUrl: brandAssets.eventPoster,
+    categories: ['literary', 'blog'],
+    tags: ['writing', 'session'],
   },
   {
-    title: 'Upcoming Event: Youth Awareness Rally - Ludhiana',
-    slug: 'upcoming-event-youth-awareness-rally-ludhiana',
+    title: 'Walk Against Drugs-2',
+    slug: 'walk-against-drugs-2',
     type: 'event',
     excerpt:
-      'Join our youth awareness rally focused on prevention, support, and public engagement.',
+      'The next district leg of the yatra will include public outreach, speakers, and youth participation.',
     content:
-      'This event includes a public march, speakers, and awareness material distribution with local volunteers and schools.',
+      'This event continues Punjab Lit Foundation’s anti-drug awareness outreach with community participation and on-ground engagement.',
+    published: true,
+    publishedAt: daysFromNow(-3),
+    eventStartDate: daysFromNow(12),
+    eventEndDate: daysFromNow(12),
+    location: 'Hoshiarpur District, Punjab',
+    featuredImageUrl: brandAssets.eventPoster,
+    categories: ['events'],
+    tags: ['yatra', 'awareness'],
+  },
+  {
+    title: 'Walk itinerary',
+    slug: 'walk-itinerary',
+    type: 'event',
+    excerpt:
+      'Awareness session for students, educators, and families under Punjab Lit Foundation’s campaign.',
+    content:
+      'The Chandigarh session is designed to strengthen prevention awareness and collective social responsibility.',
     published: true,
     publishedAt: daysFromNow(-1),
-    eventStartDate: daysFromNow(7),
-    eventEndDate: daysFromNow(7),
-    location: 'Ludhiana, Punjab',
-    categories: ['events'],
-    tags: ['youth', 'rally'],
-  },
-  {
-    title: 'Upcoming Event: Mothers Against Drugs Workshop',
-    slug: 'upcoming-event-mothers-against-drugs-workshop',
-    type: 'event',
-    excerpt:
-      'A practical workshop for mothers and caregivers on early warning signs and support pathways.',
-    content:
-      'The workshop covers prevention, communication at home, and how to connect with local support systems.',
-    published: true,
-    publishedAt: new Date(),
-    eventStartDate: daysFromNow(14),
-    eventEndDate: daysFromNow(14),
-    location: 'Jalandhar, Punjab',
+    eventStartDate: daysFromNow(25),
+    eventEndDate: daysFromNow(25),
+    location: 'Sector 18, Chandigarh',
     isFeatured: true,
+    featuredImageUrl: brandAssets.campaignPoster,
     categories: ['events'],
-    tags: ['workshop', 'mothers'],
+    tags: ['mothers-against-drugs', 'chandigarh'],
   },
   {
-    title: 'Press Note: Campaign Milestone Reached',
-    slug: 'press-note-campaign-milestone-reached',
+    title: 'Punjab Governor launches Mothers Against Drugs campaign logo',
+    slug: 'punjab-governor-launches-mothers-against-drugs-campaign-logo',
     type: 'press',
     excerpt:
-      'The campaign has reached key participation milestones across districts.',
+      'Campaign logo launch marked a major public step in the anti-drug awareness movement.',
     content:
-      'Punjab Lit Foundation acknowledges the support of volunteers and community institutions for helping reach campaign participation goals.',
+      'The launch emphasized sustained public awareness and institutional collaboration to address drug abuse.',
     published: true,
-    publishedAt: daysFromNow(-2),
+    publishedAt: daysFromNow(-34),
+    featuredImageUrl: brandAssets.logo,
     categories: ['press'],
-    tags: ['milestone'],
+    tags: ['campaign', 'announcement'],
   },
 ];
 
